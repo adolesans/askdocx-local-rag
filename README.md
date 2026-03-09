@@ -257,5 +257,6 @@ If this system were to be scaled into a larger production environment, the follo
 4. **Conversational Memory:** Adding a session management layer (e.g., using Redis) to store chat history, enabling multi-turn conversations rather than single-turn Q&A.
 
 ---
+---
 
-<p align="center"><i>End of Code — Annisa Dewiyanti</i></p>
+<p align="center"><b><i>End of Code — Annisa Dwiyanti</i></b></p>
