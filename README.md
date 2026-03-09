@@ -243,6 +243,7 @@ sequenceDiagram
     
     LLM-->>FastAPI: Return Answer, Prompt, Token Stats
     FastAPI->>User: JSON Response (Explainable Data)
+```
 ---
 
 ## 🧪 Running Tests
