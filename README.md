@@ -9,7 +9,7 @@ While most modern RAG stacks rely on complex cloud APIs and "black-box" framewor
 ## 📁 Project Structure
 
 ```text
-explainable-local-rag/
+rag-technical-test/
 ├── main.py                  # FastAPI app, endpoints, dependency injection
 ├── document_processor.py    # File ingestion (.txt, .docx, .pdf) + manual chunking
 ├── retriever.py             # Embedding generation + manual cosine similarity
@@ -195,7 +195,7 @@ To ensure the system works reliably in real-world scenarios, it was tested using
 1. **Spot-On Accuracy:** The manual search engine (built with NumPy) is highly precise. Whenever a question is asked, the most correct and relevant piece of text is consistently retrieved and placed right at the top of the results (`Passage 1`).
 2. **Zero Hallucination (It Doesn't Guess):** Trust is critical in AI. If you ask a question and the answer is NOT in the uploaded document, the system won't make up a fake answer. It will honestly reply with *"Information not available"*.
 3. **Smart Bilingual Support:** The system easily handles language barriers. You can upload a fully English document, ask a question in Indonesian, and the Llama 3.1 model will give you a natural, highly accurate Indonesian answer without sounding like a robot translator.
-4. **Quality Over Speed (The Hardware Trade-off):** Generating a complete answer takes about 15-30 seconds on a standard laptop (Intel i5 CPU). This is a deliberate choice: we use a highly intelligent "8B parameter" model to guarantee correct answers, rather than using a tiny model that replies instantly but gets the facts wrong.
+4. **Quality Over Speed:** Generating a complete answer takes about 15-30 seconds on a standard laptop (Intel i5 CPU). This is a deliberate choice: we use a highly intelligent "8B parameter" model to guarantee correct answers, rather than using a tiny model that replies instantly but gets the facts wrong.
 
 ---
 
@@ -243,7 +243,6 @@ sequenceDiagram
     
     LLM-->>FastAPI: Return Answer, Prompt, Token Stats
     FastAPI->>User: JSON Response (Explainable Data)
-
 ---
 
 ## 🧪 Running Tests
