@@ -214,34 +214,28 @@ sequenceDiagram
     User->>FastAPI: POST /ask (Question + Document)
     FastAPI->>DocProc: Save to Temp & process_document()
     
-    rect rgb(240, 248, 255)
-        Note over DocProc: INGESTION & CHUNKING
-        DocProc-->>DocProc: Read .txt / .docx / .pdf
-        DocProc-->>DocProc: Split to sentences & chunk with overlap
-    end
-    
+    Note over DocProc: ⚙️ STAGE 1: INGESTION & CHUNKING
+    DocProc-->>DocProc: Read .txt / .docx / .pdf
+    DocProc-->>DocProc: Split to sentences & chunk with overlap
     DocProc-->>FastAPI: Return List[str] (Chunks)
+    
     FastAPI->>Ret: retrieve_relevant_chunks(Question, Chunks)
     
-    rect rgb(240, 255, 240)
-        Note over Ret: EMBEDDING & RETRIEVAL
-        Ret-->>Ret: Embed Query (SentenceTransformer)
-        Ret-->>Ret: Embed All Chunks (Batch)
-        Ret-->>Ret: Calculate Cosine Similarity (NumPy Dot Product)
-        Ret-->>Ret: Sort and Extract Top-K
-    end
-    
+    Note over Ret: 🔍 STAGE 2: EMBEDDING & RETRIEVAL
+    Ret-->>Ret: Embed Query (SentenceTransformer)
+    Ret-->>Ret: Embed All Chunks (Batch)
+    Ret-->>Ret: Calculate Cosine Similarity (NumPy Dot Product)
+    Ret-->>Ret: Sort and Extract Top-K
     Ret-->>FastAPI: Return Top-K Chunks & Scores
+    
     FastAPI->>LLM: generate_answer_with_context(Question, Top-K Chunks)
     
-    rect rgb(255, 240, 245)
-        Note over LLM: PROMPT ASSEMBLY & GENERATION
-        LLM-->>LLM: Build Prompt with System + Context
-        LLM-->>LLM: Estimate Token Usage
-        LLM-->>LLM: Run Local GGUF Inference
-    end
-    
+    Note over LLM: 🧠 STAGE 3: PROMPT ASSEMBLY & GENERATION
+    LLM-->>LLM: Build Prompt with System + Context
+    LLM-->>LLM: Estimate Token Usage
+    LLM-->>LLM: Run Local GGUF Inference
     LLM-->>FastAPI: Return Answer, Prompt, Token Stats
+    
     FastAPI->>User: JSON Response (Explainable Data)
 ```
 ---
