@@ -199,7 +199,9 @@ To ensure the system works reliably in real-world scenarios, it was tested using
 
 ---
 
-## 🧱 Component Diagram
+### 🧱 Component Relationship Diagram
+
+```mermaid
 graph TD
     subgraph Client_Layer
         User((User/Postman))
@@ -232,6 +234,7 @@ graph TD
     DocProc --- Docs
     Ret --- ST
     LLM --- GGUF
+```
 
 ---
 
