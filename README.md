@@ -297,5 +297,8 @@ If this system were to be scaled into a larger production environment, the follo
 
 ---
 ---
+<br />
 
-<p align="center"><b><i>End of Code — Annisa Dewiyanti</i></b></p>
+<p align="center">
+  <b><i>End of Code — Annisa Dewiyanti</i></b>
+</p>
