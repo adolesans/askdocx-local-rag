@@ -199,6 +199,42 @@ To ensure the system works reliably in real-world scenarios, it was tested using
 
 ---
 
+## 🧱 Component Diagram
+graph TD
+    subgraph Client_Layer
+        User((User/Postman))
+    end
+
+    subgraph API_Gateway_FastAPI
+        Main[main.py]
+        Schema[schemas.py]
+    end
+
+    subgraph Core_Logic_Modules
+        DocProc[document_processor.py]
+        Ret[retriever.py]
+        LLM[llm_engine.py]
+    end
+
+    subgraph Local_Storage_Data
+        Docs[(Uploaded Files)]
+        GGUF[(model.gguf)]
+        ST[SentenceTransformer Model]
+    end
+
+    %% Relationships
+    User -->|POST /ask| Main
+    Main -.->|Validate| Schema
+    Main -->|1. Parse| DocProc
+    Main -->|2. Search| Ret
+    Main -->|3. Generate| LLM
+
+    DocProc --- Docs
+    Ret --- ST
+    LLM --- GGUF
+
+---
+
 ## 🗺️ Technical Architecture & Data Flow
 
 Below is the system architecture diagram illustrating the component boundaries and data processing stages:
